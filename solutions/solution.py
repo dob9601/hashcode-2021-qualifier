@@ -1,22 +1,22 @@
 import abc
 
-import intersection
+from world import World
 
 
 class Solution(abc.ABC):
-    def __init__(self, intersections: dict[int, intersection.Intersection], filename: str):
-        self.intersections = intersections
-        self.filename = filename
+    def __init__(self, world: World):
+        self.filename = world.filename
+        self.world = world
 
     @abc.abstractmethod
-    def run(self) -> dict[int, intersection.Intersection]:
+    def run(self) -> None:
         ...
 
     def serialise(self, score: int) -> None:
         filename = self.filename.split('.')[0]
         with open(f'output/{filename}_{self.name}_{score}.out', 'w') as file:
-            file.write(str(len(self.intersections)) + '\n')
-            for intersection in self.intersections.values():
+            file.write(str(len(self.world.intersections)) + '\n')
+            for intersection in self.world.intersections:
                 file.write(str(intersection.id) + '\n')
                 file.write(str(len(set(intersection.schedule))) + '\n')
 
