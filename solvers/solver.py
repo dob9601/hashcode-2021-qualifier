@@ -3,7 +3,7 @@ import abc
 from world import World
 
 
-class Solution(abc.ABC):
+class Solver(abc.ABC):
     def __init__(self, world: World):
         self.filename = world.filename
         self.world = world

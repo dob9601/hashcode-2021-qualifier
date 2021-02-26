@@ -12,7 +12,7 @@ class World:
     def __init__(self, filename: str) -> None:
         self.filename = filename
 
-        self.streets: dict[str, street.Street] = []
+        self.streets: dict[str, street.Street] = {}
         self.cars: list[car.Car] = []
 
         self.duration: int = 0
@@ -24,7 +24,7 @@ class World:
             first_line_data = file.readline().strip('\n').split(' ')
             self.duration = int(first_line_data[0])
             self.intersection_count = int(first_line_data[1])
-            self.intersections = [None for i in range(self.intersection_count)]
+            self.intersections = [None for _ in range(self.intersection_count)]
             street_count = int(first_line_data[2])
             car_count = int(first_line_data[3])
             self.points_per_car = int(first_line_data[4])
@@ -49,11 +49,11 @@ class World:
                     route.append(street_object)
                 self.cars.append(car.Car(route, route[0].length + i))
 
-    def simulate(self, scheduel: list[list[str]]) -> int:
+    def simulate(self, schedule: list[list[str]]) -> int:
         print('-> Duplicating Cars and Intersections')
         intersections = self.intersections.copy()
 
-        for i, sched in enumerate(scheduel):
+        for i, sched in enumerate(schedule):
             intersections[i].schedule = sched
 
 
@@ -69,14 +69,14 @@ class World:
                     if current_car.route_complete:
                         points += self.points_per_car + (self.duration - tick)
 
-            for intersection in intersections.values():
+            for intersection in intersections:
                 intersection.step(tick)
 
         print('\n-> Restoring initial state')
         for current_car in self.cars:
             current_car.reset()
 
-        for current_street in self.streets:
+        for current_street in self.streets.values():
             current_street.reset()
 
         return points
@@ -93,12 +93,3 @@ class World:
                 best_score = score
                 self.serialise(best_score)
 
-    def generate_schedule(self) -> None:
-        for intersection in self.intersections.values():
-            streets = [s.name for s in intersection.streets]
-            shuffle(streets)
-            for index, current_street in enumerate(streets):
-                while random() > 0.7:
-                    streets.insert(index, current_street)
-
-            intersection.schedule = streets
