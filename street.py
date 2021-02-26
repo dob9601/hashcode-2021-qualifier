@@ -11,7 +11,7 @@ class Street:
         self.name = name
         self.world = world
 
-        self.light_green = True
+        self.light_green = False
 
     @property
     def cars(self) -> list[car.Car]:
@@ -20,6 +20,9 @@ class Street:
     @property
     def front_car(self) -> car.Car:
         return max(self.cars, key=lambda car: car.current_position)
+
+    def reset(self):
+        self.light_green = False
 
     def __len__(self):
         return self.length
@@ -30,5 +33,3 @@ class Street:
     def __str__(self):
         return repr(self)
 
-    '''def __eq__(self, other: Street):
-        return self.name == other.name and self.length == other.length'''
