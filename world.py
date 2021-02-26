@@ -80,16 +80,3 @@ class World:
             current_street.reset()
 
         return points
-
-    def descend(self):
-        print('-> Initiating Descent')
-        best_score = 0
-        for _ in range(1000):
-            self.generate_schedule()
-            score = self.simulate()
-            print(score)
-            if score > best_score:
-                print('-> New best score found')
-                best_score = score
-                self.serialise(best_score)
-
