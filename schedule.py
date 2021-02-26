@@ -29,8 +29,8 @@ class Schedule:
                         current_count = 1
                 file.write(f'{current_street} {str(current_count)}\n')
 
-    @classmethod
-    def from_file(cls, filename: str) -> Schedule:
+    @staticmethod
+    def from_file(filename: str) -> Schedule:
         with open(f'ouput/{filename}.out','r') as file:
             intersections = int(file.readline())
             schedule = [[] for i in range(intersections)]
