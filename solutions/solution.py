@@ -41,7 +41,7 @@ class Solution(abc.ABC):
                 streets = int(file.readline())
                 for _ in range(streets):
                     current_street = file.readline().split(" ")
-                    scheduel[intersection] += [current_street[0]] * current_street[1]
+                    scheduel[intersection] += [current_street[0]] * int(current_street[1])
         return scheduel
 
     @property
