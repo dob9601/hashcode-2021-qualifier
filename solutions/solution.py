@@ -36,13 +36,13 @@ class Solution(abc.ABC):
     def deserialise(filename: str) -> list[list[str]]:
         with open(f'ouput/{filename}.out','r') as file:
             intersections = int(file.readline())
-            scheduel = [[] for i in range(intersections)]
+            schedule = [[] for i in range(intersections)]
             for intersection in range(intersections):
                 streets = int(file.readline())
                 for _ in range(streets):
                     current_street = file.readline().split(" ")
-                    scheduel[intersection] += [current_street[0]] * int(current_street[1])
-        return scheduel
+                    schedule[intersection] += [current_street[0]] * int(current_street[1])
+        return schedule
 
     @property
     @abc.abstractmethod
