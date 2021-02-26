@@ -31,7 +31,7 @@ class Solution(abc.ABC):
                         current_street = scheduled_street
                         current_count = 1
                 file.write(f'{current_street} {str(current_count)}\n')
-    
+
     @staticmethod
     def deserialise(filename: str) -> list[list[str]]:
         with open(f'ouput/{filename}.out','r') as file:
