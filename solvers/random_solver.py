@@ -2,6 +2,7 @@ from random import shuffle, random
 
 from solvers.solver import Solver
 from world import World
+from schedule import Schedule
 
 
 class RandomSolver(Solver):
@@ -10,7 +11,7 @@ class RandomSolver(Solver):
     def __init__(self, world: World):
         super().__init__(world)
 
-    def generate_schedule(self) -> None:
+    def generate_schedule(self) -> Schedule:
         for intersection in self.world.intersections:
             streets = [s.name for s in intersection.streets]
             shuffle(streets)

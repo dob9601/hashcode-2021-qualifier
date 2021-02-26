@@ -29,6 +29,9 @@ class Schedule:
                         current_count = 1
                 file.write(f'{current_street} {str(current_count)}\n')
 
+    def add_intersection(self, new_intersection: Intersection, schedule: list[str]):
+        self.data[new_intersection.id] = schedule
+
     @staticmethod
     def from_file(filename: str) -> Schedule:
         with open(f'ouput/{filename}.out','r') as file:
