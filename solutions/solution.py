@@ -12,6 +12,7 @@ class Solution(abc.ABC):
     def run(self) -> None:
         ...
 
+    @staticmethod
     def serialise(self, score: int) -> None:
         filename = self.filename.split('.')[0]
         with open(f'output/{filename}_{self.name}_{score}.out', 'w') as file:
@@ -30,6 +31,18 @@ class Solution(abc.ABC):
                         current_street = scheduled_street
                         current_count = 1
                 file.write(f'{current_street} {str(current_count)}\n')
+    
+    @staticmethod
+    def de_serialise(filename: str) -> list[list[str]]:
+        with open(f'ouput/{filename}.out','r') as file:
+            intersections = int(file.readline())
+            scheduel = [[] for i in range(intersections)]
+            for intersection in range(intersections):
+                streets = int(file.readline())
+                for _ in range(streets):
+                    current_street = file.readline().split(" ")
+                    scheduel[intersection] += [current_street[0]] * current_street[1]
+        return scheduel
 
     @property
     @abc.abstractmethod
