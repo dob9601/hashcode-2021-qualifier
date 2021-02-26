@@ -102,23 +102,3 @@ class World:
                     streets.insert(index, current_street)
 
             intersection.schedule = streets
-
-    def serialise(self, score: int) -> None:
-        with open(f'output/{self.filename}.out_{score}', 'w') as file:
-            file.write(str(len(self.intersections)) + '\n')
-            for intersection in self.intersections.values():
-                file.write(str(intersection.id) + '\n')
-                file.write(str(len(set(intersection.schedule))) + '\n')
-
-                current_street: str = intersection.schedule[0]
-                current_count = 1
-                for scheduled_street in intersection.schedule[1:]:
-                    if scheduled_street == current_street:
-                        current_count += 1
-                    else:
-                        file.write(f'{current_street} {str(current_count)}\n')
-                        current_street = scheduled_street
-                        current_count = 1
-                file.write(f'{current_street} {str(current_count)}\n')
-
-
