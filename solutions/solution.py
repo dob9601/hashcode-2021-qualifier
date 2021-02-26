@@ -33,7 +33,7 @@ class Solution(abc.ABC):
                 file.write(f'{current_street} {str(current_count)}\n')
     
     @staticmethod
-    def de_serialise(filename: str) -> list[list[str]]:
+    def deserialise(filename: str) -> list[list[str]]:
         with open(f'ouput/{filename}.out','r') as file:
             intersections = int(file.readline())
             scheduel = [[] for i in range(intersections)]
