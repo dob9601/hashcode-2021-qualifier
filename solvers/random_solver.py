@@ -17,14 +17,14 @@ class RandomSolver(Solver):
             streets = [s.name for s in intersection.streets]
             shuffle(streets)
             for index, current_street in enumerate(streets):
-                while random() > 0.7:
+                while random() > 0.4:
                     streets.insert(index, current_street)
 
             schedule.append(streets)
 
         return Schedule(schedule)
 
-    def descend(self):
+    def run(self):
         print('-> Initiating Descent')
         best_score = 0
         for _ in range(1000):
@@ -34,4 +34,4 @@ class RandomSolver(Solver):
             if score > best_score:
                 print('-> New best score found')
                 best_score = score
-                self.serialise(best_score)
+                schedule.serialise(best_score, 'asdf', self.name)

@@ -1,5 +1,5 @@
 from world import World
-from solvers import RandomSolver
+from solvers.random_solver import RandomSolver
 
 from pprint import PrettyPrinter
 
@@ -9,3 +9,5 @@ print = pp.pprint
 filename = 'b.txt'
 
 world = World(filename)
+solver = RandomSolver(world)
+solver.run()

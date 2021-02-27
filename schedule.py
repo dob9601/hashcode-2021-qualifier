@@ -1,6 +1,6 @@
-from intersection import Intersection
-
 from __future__ import annotations
+
+from intersection import Intersection
 
 
 class Schedule:
