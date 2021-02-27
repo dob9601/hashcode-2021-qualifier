@@ -1,10 +1,9 @@
-from random import shuffle, random
-import os
 from typing import Optional
 
 import car
 import intersection
 import street
+import schedule
 
 
 class World:
@@ -49,13 +48,12 @@ class World:
                     route.append(street_object)
                 self.cars.append(car.Car(route, route[0].length + i))
 
-    def simulate(self, schedule: list[list[str]]) -> int:
+    def simulate(self, world_schedule: schedule.Schedule) -> int:
         print('-> Duplicating Cars and Intersections')
         intersections = self.intersections.copy()
 
-        for i, sched in enumerate(schedule):
-            intersections[i].schedule = sched
-
+        for i, schedule in enumerate(world_schedule.data):
+            intersections[i].schedule = schedule
 
         points = 0
 

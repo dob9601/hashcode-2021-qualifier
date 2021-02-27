@@ -12,6 +12,7 @@ class RandomSolver(Solver):
         super().__init__(world)
 
     def generate_schedule(self) -> Schedule:
+        schedule = []
         for intersection in self.world.intersections:
             streets = [s.name for s in intersection.streets]
             shuffle(streets)
@@ -19,14 +20,16 @@ class RandomSolver(Solver):
                 while random() > 0.7:
                     streets.insert(index, current_street)
 
-            intersection.schedule = streets
+            schedule.append(streets)
+
+        return Schedule(schedule)
 
     def descend(self):
         print('-> Initiating Descent')
         best_score = 0
         for _ in range(1000):
-            self.generate_schedule()
-            score = self.world.simulate()
+            schedule = self.generate_schedule()
+            score = self.world.simulate(schedule)
             print(score)
             if score > best_score:
                 print('-> New best score found')
