@@ -17,7 +17,7 @@ class RandomSolver(Solver):
             streets = [s.name for s in intersection.streets]
             shuffle(streets)
             for index, current_street in enumerate(streets):
-                while random() > 0.4:
+                while random() > 0.6:
                     streets.insert(index, current_street)
 
             schedule.append(streets)

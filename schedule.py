@@ -36,7 +36,7 @@ class Schedule:
     def from_file(filename: str) -> Schedule:
         with open(f'ouput/{filename}.out','r') as file:
             intersections = int(file.readline())
-            schedule = [[] for i in range(intersections)]
+            schedule = [[] for _ in range(intersections)]
             for intersection in range(intersections):
                 streets = int(file.readline())
                 for _ in range(streets):

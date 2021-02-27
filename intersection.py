@@ -12,9 +12,11 @@ class Intersection:
         self.streets: list[street.Street] = []
 
     def step(self, tick: int) -> None:
-        assert len(self.schedule)
+        if len(self.schedule):
+            current_street = self.schedule[tick % len(self.schedule)]
+        else:
+            current_street = ''
 
-        current_street = self.schedule[tick % len(self.schedule)]
         for street in self.streets:
             if street.name == current_street:
                 street.light_green = True
