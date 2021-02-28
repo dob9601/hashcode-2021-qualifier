@@ -1,13 +1,13 @@
 from world import World
-from solvers.active_street_solver import ActiveStreetSolver
+from solvers.genetic_solver import GeneticSolver
 
 from pprint import PrettyPrinter
 
 pp = PrettyPrinter(indent=4)
 print = pp.pprint
 
-filename = 'f.txt'
+filename = 'a.txt'
 
 world = World(filename)
-solver = ActiveStreetSolver(world)
+solver = GeneticSolver(world)
 solver.run()

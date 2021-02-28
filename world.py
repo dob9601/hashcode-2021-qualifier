@@ -49,7 +49,7 @@ class World:
                 self.cars.append(car.Car(route, route[0].length + i))
 
     def simulate(self, world_schedule: schedule.Schedule) -> int:
-        print('-> Duplicating Cars and Intersections')
+        # print('-> Duplicating Intersections')
         intersections = self.intersections.copy()
 
         for i, schedule in enumerate(world_schedule.data):
@@ -57,10 +57,10 @@ class World:
 
         points = 0
 
-        print('Running Solution')
+        # print('Running Solution')
         for tick in range(self.duration):
-            if tick % 100 == 0:
-                print(f'-> Step {tick}/{self.duration}', end='\r')
+            # if tick % 100 == 0:
+                # print(f'-> Step {tick}/{self.duration}', end='\r')
             for current_car in self.cars:
                 if not current_car.route_complete:
                     current_car.step()
@@ -70,7 +70,7 @@ class World:
             for intersection in intersections:
                 intersection.step(tick)
 
-        print('\n-> Restoring initial state')
+        # print('\n-> Restoring initial state')
         for current_car in self.cars:
             current_car.reset()
 
