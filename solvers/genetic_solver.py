@@ -66,7 +66,7 @@ class GeneticSolver(Solver):
                 for intersection_street in intersection:
                     mutation_factor = random.random()
 
-                    if mutation_factor < 0.2:
+                    if mutation_factor < self.mutativity:
                         pass
                     elif self.mutativity <= mutation_factor <= 2*self.mutativity:
                         mutated_intersection_data += [intersection_street] * 2
