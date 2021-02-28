@@ -1,5 +1,4 @@
 import random
-from typing import Optional
 
 from solvers.solver import Solver
 from world import World
@@ -44,8 +43,7 @@ class GeneticSolver(Solver):
         schedules_a = schedules[:middle_index]
         schedules_b = schedules[middle_index:]
         for schedule_a, schedule_b in zip(schedules_a, schedules_b):
-            # 4 so that population stays the same
-            for _ in range(4):
+            for _ in range(2):
                 new_schedule_data: list[list[str]] = []
 
                 for intersection_a, intersection_b in zip(schedule_a.schedule.data, schedule_b.schedule.data):
@@ -54,6 +52,7 @@ class GeneticSolver(Solver):
                 new_schedule = Schedule(new_schedule_data)
                 evaluated_schedule = self.EvaluatedSchedule(new_schedule)
                 output.append(evaluated_schedule)
+            output += [schedule_a, schedule_b]
 
         return output
 
@@ -108,7 +107,7 @@ class GeneticSolver(Solver):
             # send out schedules to be processed
             for j, schedule in enumerate(schedules):
                 red.rpush("tasks", pickle.dumps((j,schedule.schedule)))
-                
+
 
             # recieve preocessed schedules
             for i in range(schedule_count):
@@ -117,7 +116,7 @@ class GeneticSolver(Solver):
                 print(" ->" + item + "     ", end = "\r")
                 item = item.split(" ")
                 schedules[int(item[0])].score = int(item[1])
-            
+
 
             best_schedule = max(schedules, key=lambda x: x.score)
             print(f"--> best of epoch {best_schedule.score}")
