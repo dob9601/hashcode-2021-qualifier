@@ -10,8 +10,8 @@ import pickle
 class GeneticSolver(Solver):
     name = 'gs'
     epochs = 1000
-    population = 100
-    mutativity = 0.05
+    population = 252
+    mutativity = 0.005
 
     class EvaluatedSchedule():
         def __init__(self, schedule: Schedule, score=0):
@@ -114,12 +114,13 @@ class GeneticSolver(Solver):
             for i in range(schedule_count):
                 item = red.blpop("results",0)
                 item = item[1].decode()
-                print(item)
+                print(" ->" + item + "     ", end = "\r")
                 item = item.split(" ")
                 schedules[int(item[0])].score = int(item[1])
             
 
             best_schedule = max(schedules, key=lambda x: x.score)
+            print(f"--> best of epoch {best_schedule.score}")
             if best_schedule.score > max_score:
                 print('--> Serialising New Best Schedule', end='')
                 max_score = best_schedule.score
@@ -127,7 +128,8 @@ class GeneticSolver(Solver):
                 print(f' [DONE] [SCORE: {best_schedule.score}]')
 
             print('Culling, Breeding, and Mutating Schedules', end='')
-            schedules = schedules[:len(schedules)//2]
+            schedules.sort(key=lambda x: x.score)
+            schedules = schedules[len(schedules)//2:]
             schedules = self.breed_schedules(schedules)
             self.mutate_schedules(schedules)
             print(' [DONE]')
