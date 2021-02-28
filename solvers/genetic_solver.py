@@ -84,6 +84,9 @@ class GeneticSolver(Solver):
         schedules: list[GeneticSolver.EvaluatedSchedule] = []
         max_score: int = 0
         red = redis.Redis("localhost", port=6379, db=0)
+        red.set("world", self.world.filename)
+        red.delete("tasks")
+        red.delete("results")
 
         print('Generating Population')
         for i in range(self.population):
@@ -110,7 +113,8 @@ class GeneticSolver(Solver):
             # recieve preocessed schedules
             for i in range(schedule_count):
                 item = red.blpop("results",0)
-                item = item[1]
+                item = item[1].decode()
+                print(item)
                 item = item.split(" ")
                 schedules[int(item[0])] = int(item[1])
             
