@@ -23,3 +23,5 @@ class Intersection:
                 continue
             street.light_green = False
 
+    def __repr__(self):
+        return f'<Streets: {self.streets}>'
