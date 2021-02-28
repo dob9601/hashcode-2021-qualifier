@@ -49,12 +49,6 @@ class World:
                 self.cars.append(car.Car(route, route[0].length + i))
 
     def simulate(self, world_schedule: schedule.Schedule) -> int:
-        print(len(self.cars))
-        for current_car in self.cars:
-            current_car.reset()
-
-        for current_street in self.streets.values():
-            current_street.reset()
         # print('-> Duplicating Intersections')
         intersections = self.intersections.copy()
 
