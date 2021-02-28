@@ -28,7 +28,7 @@ class Car:
         return not len(self.route)
 
     def reset(self):
-        self.route = self.visited
+        self.route += self.visited
         self.visited = []
         self.current_position = self.initial_position
 
