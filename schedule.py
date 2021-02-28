@@ -34,12 +34,13 @@ class Schedule:
 
     @staticmethod
     def from_file(filename: str) -> Schedule:
-        with open(f'ouput/{filename}.out','r') as file:
+        with open(f'output/{filename}.out','r') as file:
             intersections = int(file.readline())
             schedule = [[] for _ in range(intersections)]
-            for intersection in range(intersections):
+            for _ in range(intersections):
+                intersection_id = int(file.readline())
                 streets = int(file.readline())
                 for _ in range(streets):
-                    current_street = file.readline().split(" ")
-                    schedule[intersection] += [current_street[0]] * int(current_street[1])
+                    current_street = file.readline().rstrip('\n').split(' ')
+                    schedule[intersection_id] += [current_street[0]] * int(current_street[1])
         return Schedule(schedule)

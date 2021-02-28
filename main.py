@@ -1,5 +1,5 @@
 from world import World
-from solvers.genetic_solver import GeneticSolver
+from solvers.random_solver import RandomSolver
 
 from pprint import PrettyPrinter
 
@@ -9,5 +9,5 @@ print = pp.pprint
 filename = 'a.txt'
 
 world = World(filename)
-solver = GeneticSolver(world)
+solver = RandomSolver(world)
 solver.run()

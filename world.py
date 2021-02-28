@@ -67,8 +67,12 @@ class World:
                     if current_car.route_complete:
                         points += self.points_per_car + (self.duration - tick)
 
+                    #print(current_car)
+
             for intersection in intersections:
                 intersection.step(tick)
+
+            # breakpoint()
 
         # print('\n-> Restoring initial state')
         for current_car in self.cars:
