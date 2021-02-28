@@ -109,12 +109,13 @@ class GeneticSolver(Solver):
                 red.rpush("tasks", pickle.dumps((j,schedule.schedule)))
 
 
-            # recieve preocessed schedules
+            # receive preocessed schedules
+            print(f'--> Receiving results 0/{schedule_count}', end='\r')
             for i in range(schedule_count):
                 item = red.blpop("results",0)
                 item = item[1].decode()
-                print(" ->" + item + "     ", end = "\r")
                 item = item.split(" ")
+                print(f'--> Receiving results {i}/{schedule_count} [Result {item[0]} received with score {item[1]}]', end='\r')
                 schedules[int(item[0])].score = int(item[1])
 
 
