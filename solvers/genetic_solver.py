@@ -4,7 +4,8 @@ from typing import Optional
 from solvers.solver import Solver
 from world import World
 from schedule import Schedule
-
+import redis
+import pickle
 
 class GeneticSolver(Solver):
     name = 'gs'
@@ -82,6 +83,7 @@ class GeneticSolver(Solver):
     def run(self):
         schedules: list[GeneticSolver.EvaluatedSchedule] = []
         max_score: int = 0
+        red = redis.Redis("localhost", port=6379, db=0)
 
         print('Generating Population')
         for i in range(self.population):
@@ -94,11 +96,24 @@ class GeneticSolver(Solver):
             print(f'-> Epoch {i+1}/{self.epochs}')
 
             schedule_count = len(schedules)
+            # for j, schedule in enumerate(schedules):
+            #     print(f'--> Evaluating Schedule {j+1}/{schedule_count}', end='\r')
+            #     score = self.world.simulate(schedule.schedule)
+            #     schedule.score = score
+            # print()
+
+            # send out schedules to be processed
             for j, schedule in enumerate(schedules):
-                print(f'--> Evaluating Schedule {j+1}/{schedule_count}', end='\r')
-                score = self.world.simulate(schedule.schedule)
-                schedule.score = score
-            print()
+                red.rpush("tasks", pickle.dumps((j,schedule.schedule)))
+                
+
+            # recieve preocessed schedules
+            for i in range(schedule_count):
+                item = red.blpop("results",0)
+                item = item[1]
+                item = item.split(" ")
+                schedules[int(item[0])] = int(item[1])
+            
 
             best_schedule = max(schedules, key=lambda x: x.score)
             if best_schedule.score > max_score:
