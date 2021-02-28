@@ -20,4 +20,3 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             red.lpush("tasks", item)
             break
-        
