@@ -115,7 +115,7 @@ class GeneticSolver(Solver):
                 item = red.blpop("results",0)
                 item = item[1].decode()
                 item = item.split(" ")
-                print(f'--> Receiving results {i}/{schedule_count} [Result {item[0]} received with score {item[1]}]', end='\r')
+                print(f'--> Receiving results {i}/{schedule_count} [Result {item[0]} received with score {item[1]}]             ', end='\r')
                 schedules[int(item[0])].score = int(item[1])
 
 
