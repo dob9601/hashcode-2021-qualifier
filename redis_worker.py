@@ -2,10 +2,10 @@ import redis
 from world import World
 import pickle
 
-host = "localhost"
+host = "192.168.0.34"
 
 if __name__ == "__main__":
-    red = redis.Redis("localhost", port=6379, db=0)
+    red = redis.Redis(host, port=6379, db=0)
     world_file = red.get("world").decode()
 
     world = World(world_file)

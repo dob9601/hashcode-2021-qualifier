@@ -83,7 +83,7 @@ class GeneticSolver(Solver):
     def run(self):
         schedules: list[GeneticSolver.EvaluatedSchedule] = []
         max_score: int = 0
-        red = redis.Redis("localhost", port=6379, db=0)
+        red = redis.Redis("192.168.0.34", port=6379, db=0)
         red.set("world", self.world.filename)
         red.delete("tasks")
         red.delete("results")
@@ -116,7 +116,7 @@ class GeneticSolver(Solver):
                 item = item[1].decode()
                 print(item)
                 item = item.split(" ")
-                schedules[int(item[0])] = int(item[1])
+                schedules[int(item[0])].score = int(item[1])
             
 
             best_schedule = max(schedules, key=lambda x: x.score)

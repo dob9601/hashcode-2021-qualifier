@@ -8,7 +8,7 @@ from pprint import PrettyPrinter
 pp = PrettyPrinter(indent=4)
 print = pp.pprint
 
-filename = 'b.txt'
+filename = 'e.txt'
 
 world = World(filename)
 solver = GeneticSolver(world)
