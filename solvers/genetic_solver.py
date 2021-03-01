@@ -79,19 +79,13 @@ class GeneticSolver(Solver):
 
         return output
 
-    def run(self):
-        schedules: list[GeneticSolver.EvaluatedSchedule] = []
+    def run(self, schedules: list[EvaluatedSchedule]):
         max_score: int = 0
+
         red = redis.Redis("192.168.0.34", port=6379, db=0)
         red.set("world", self.world.filename)
         red.delete("tasks")
         red.delete("results")
-
-        print('Generating Population')
-        for i in range(self.population):
-            print(f'-> Schedule {i+1}/{self.population}', end='\r')
-            schedules.append(self.EvaluatedSchedule(self.generate_random_schedule()))
-        print()
 
         print(f'Commencing {self.epochs} epochs')
         for i in range(self.epochs):
@@ -134,6 +128,22 @@ class GeneticSolver(Solver):
             self.mutate_schedules(schedules)
             print(' [DONE]')
 
-
         print(f'Best score: {max_score}')
+
+    def run_from_existing(self, filename: str) -> None:
+        schedules: list[GeneticSolver.EvaluatedSchedule] = [self.EvaluatedSchedule(Schedule.from_file(filename)) for _ in range(self.population)]
+        self.run(schedules)
+
+
+    def run_from_random(self) -> None:
+        schedules: list[GeneticSolver.EvaluatedSchedule] = []
+
+        print('Generating Population')
+        for i in range(self.population):
+            print(f'-> Schedule {i+1}/{self.population}', end='\r')
+            schedules.append(self.EvaluatedSchedule(self.generate_random_schedule()))
+        print()
+
+
+
 

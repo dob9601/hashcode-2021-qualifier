@@ -12,4 +12,4 @@ filename = 'e.txt'
 
 world = World(filename)
 solver = GeneticSolver(world)
-solver.run()
+solver.run_from_existing('e_bps_721933')
