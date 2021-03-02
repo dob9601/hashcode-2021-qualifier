@@ -2,6 +2,8 @@ from solvers.solver import Solver
 from world import World
 from schedule import Schedule
 
+from math import ceil
+
 
 class BusiestPrioritySolver(Solver):
     name = 'bps'
@@ -11,19 +13,24 @@ class BusiestPrioritySolver(Solver):
 
     def run(self):
         print('Generating Solution')
-        street_weighting: dict[str, float] = {}
+        street_weighting: dict[str, int] = {}
         for car in self.world.cars:
             for street in car.route:
                 if street.name not in street_weighting:
-                    street_weighting[street.name] = 1.0
+                    street_weighting[street.name] = 1
                 else:
-                    street_weighting[street.name] += 0.1
+                    street_weighting[street.name] += 1
 
         schedule = []
         for intersection in self.world.intersections:
+            total = 0
             streets = []
             for s in intersection.streets:
-                for _ in range(round(street_weighting.get(s.name, 0))):
+                total += street_weighting.get(s.name, 0)
+            total += 1
+
+            for s in intersection.streets:
+                for _ in range((ceil(street_weighting.get(s.name, 0) / total))):
                     streets.append(s.name)
 
             if not len(streets):

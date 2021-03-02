@@ -46,7 +46,9 @@ class World:
                 for route_street in car_data[1:]:
                     street_object = self.streets[route_street]
                     route.append(street_object)
-                self.cars.append(car.Car(route, route[0].length + i))
+                self.cars.append(car.Car(route, len(route[0])+ car_count - i))
+
+        # print(min(self.cars, key=lambda x: len(x.route)))
 
     def simulate(self, world_schedule: schedule.Schedule) -> int:
         for i, schedule in enumerate(world_schedule.data):
@@ -54,18 +56,37 @@ class World:
 
         points = 0
 
+        active_cars = list(self.cars)
+
         # print('Running Solution')
         for tick in range(self.duration + 1):
-            # if tick % 100 == 0:
-                # print(f'-> Step {tick}/{self.duration}', end='\r')
+            print([s for s in self.streets.values() if s.name == 'die-dif'])
+            if tick % 100 == 0:
+                print(f'-> Step {tick}/{self.duration}', end='\r')
+
+            # End the simulation prematurely if there are no cars active
+            if not len(active_cars):
+                break
+
+            # Step through all of the intersections
             for intersection in self.intersections:
                 intersection.step(tick)
 
-            for current_car in self.cars:
+            # print(self.intersections[1])
+
+            for current_car in active_cars:
                 if not current_car.route_complete:
                     current_car.step()
                     if current_car.route_complete:
                         points += self.points_per_car + (self.duration - tick)
+                        active_cars.remove(current_car)
+                        print(f'Car finished with {self.points_per_car + (self.duration - tick)} points. at {tick} seconds into the sim')
+                        print(current_car)
+                        print(current_car.visited)
+                        # breakpoint()
+
+        print()
+        print(len(active_cars))
 
         # print('\n-> Restoring initial state')
         for current_car in self.cars:
