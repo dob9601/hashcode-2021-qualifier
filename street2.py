@@ -23,7 +23,7 @@ class Street:
 
     def step(self, tick: int) -> int:
         """Step all cars in the simulation and return the increase in score."""
-        if not len(self.cars) or not self.green_light:
+        if not self.green_light or not len(self.cars):
             return 0
 
         front_car = self.cars[0]
@@ -37,6 +37,7 @@ class Street:
             self.world.streets[next_street].add_car(front_car[1], tick)
             return 0
 
+        print(f'{front_car[1]} finished at tick {tick}')
         return self.world.points_per_car + (self.world.duration - tick)
 
     def backup(self):

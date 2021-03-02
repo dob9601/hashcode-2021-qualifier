@@ -57,6 +57,8 @@ class World:
 
         points = 0
 
+
+        # active_streets = [self.streets[s] for c in self.cars for s in c.streets]
         # print('Running Solution')
         for tick in range(self.duration + 1):
             if tick % 100 == 0:
@@ -66,11 +68,10 @@ class World:
             # Step through all of the intersections
             for intersection in self.intersections:
                 intersection.step(tick)
-            # print(self.intersections[1])
 
-            for street_name in self.streets:
-                street = self.streets[street_name]
+            for street in self.streets.values(): # active_streets:
                 points += street.step(tick)
+
         print()
 
         # print('\n-> Restoring initial state')

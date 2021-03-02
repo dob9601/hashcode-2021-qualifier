@@ -23,3 +23,5 @@ class Car:
         self.streets = self.visited + self.streets
         self.visited = []
 
+    def __repr__(self):
+        return f'<Route: {self.streets}, Visited: {self.visited}, Route complete: {self.route_complete}>'
