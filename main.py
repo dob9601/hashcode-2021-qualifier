@@ -1,16 +1,6 @@
-from solvers.genetic_solver import GeneticSolver
-from world import World
-from schedule import Schedule
-from solvers.random_solver import RandomSolver
-from solvers.busiest_priority_solver import BusiestPrioritySolver
+import street2, world2, schedule
 
-from pprint import PrettyPrinter
+w=world2.World('e.txt')
+schedule=schedule.Schedule.from_file('e_684786_inc')
 
-pp = PrettyPrinter(indent=4)
-print = pp.pprint
-
-filename = 'e.txt'
-
-world = World(filename)
-s = Schedule.from_file('e_bps_779288')
-print(world.simulate(s))
+print(w.simulate(schedule))
