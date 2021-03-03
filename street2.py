@@ -30,7 +30,7 @@ class Street:
 
     def step(self, tick: int) -> int:
         """Step all cars in the simulation and return the increase in score."""
-        if not self.front_car or self.front_car.exit_tick > tick:
+        if not self.front_car:
             # Either there are no cars present on the street, or no cars are currently
             # in need of moving therefore no score increase
             return 0
@@ -44,9 +44,10 @@ class Street:
         if delta_score:
             return delta_score
 
-        if self.green_light:
+        if self.green_light and self.front_car.exit_tick <= tick:
             # A car needs to be moved and the light is green
             next_street = self.front_car.car.streets.pop(0)
+            self.front_car.car.visited.append(next_street)
             self.world.streets[next_street].add_car(self.front_car.car, tick)
             del self.cars[0]
             return 0
