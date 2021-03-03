@@ -31,14 +31,13 @@ class Street:
     def step(self, tick: int) -> int:
         """Step all cars in the simulation and return the increase in score."""
         if not self.front_car:
-            # Either there are no cars present on the street, or no cars are currently
-            # in need of moving therefore no score increase
             return 0
 
+        # Iterate over all cars. If a car has reached its goal remove it and add its score
         delta_score = 0
         for car in self.cars:
             if not len(car.car.streets) and car.exit_tick == tick:
-                self.cars.remove(car)
+                self.cars.remove(car) # THIS IS BAD
                 delta_score += self.world.points_per_car + (self.world.duration - tick)
 
         if delta_score:

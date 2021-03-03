@@ -73,6 +73,10 @@ class GeneticSolver(Solver):
                     else:
                         mutated_intersection_data.append(intersection_street)
 
+                if not len(mutated_intersection_data):
+                    # Handler to prevent 0-length streets from existing
+                    mutated_intersection_data.append(intersection[0])
+
                 mutated_schedule_data.append(mutated_intersection_data)
 
             output.append(self.EvaluatedSchedule(Schedule(mutated_schedule_data)))
@@ -98,12 +102,12 @@ class GeneticSolver(Solver):
             #     schedule.score = score
             # print()
 
-            # send out schedules to be processed
+            # Send out schedules to be processed
             for j, schedule in enumerate(schedules):
                 red.rpush("tasks", pickle.dumps((j,schedule.schedule)))
 
 
-            # receive preocessed schedules
+            # Receive preprocessed schedules
             print(f'--> Receiving results 0/{schedule_count}', end='\r')
             for i in range(schedule_count):
                 item = red.blpop("results",0)
