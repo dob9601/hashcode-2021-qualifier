@@ -1,6 +1,19 @@
 import street2, world2, schedule
 
-w=world2.World('a.txt')
-schedule=schedule.Schedule.from_file('a_test') # d_ass_1583635
 
-print(w.simulate(schedule))
+# Score should be 710,011
+w=world2.World('e.txt')
+s=schedule.Schedule.from_file('e_bps_779288') # d_ass_1583635
+
+# Score should be 2,002
+# w=world2.World('a.txt')
+# s=schedule.Schedule.from_file('a_gs_2010')
+
+# Score should be 1320177, comes out to 1320031
+w=world2.World('f.txt')
+s=schedule.Schedule.from_file('f_bps_1411194')
+
+# Score should be 4566888
+w=world2.World('b.txt')
+s=schedule.Schedule.from_file('b_bps_4566888')
+print(w.simulate(s))
