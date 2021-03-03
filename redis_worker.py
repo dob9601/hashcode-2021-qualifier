@@ -1,5 +1,5 @@
 import redis
-from world import World
+from world2 import World
 import pickle
 
 host = "192.168.0.34"
