@@ -1,5 +1,6 @@
 import redis
-from world2 import World
+import street2
+import world2
 import pickle
 
 host = "192.168.0.34"
@@ -8,7 +9,7 @@ if __name__ == "__main__":
     red = redis.Redis(host, port=6379, db=0)
     world_file = red.get("world").decode()
 
-    world = World(world_file)
+    world = world2.World(world_file)
 
     while True:
         item = red.brpop("tasks")[1]
