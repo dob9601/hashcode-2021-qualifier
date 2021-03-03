@@ -1,6 +1,6 @@
 import abc
 
-from world import World
+from world2 import World
 
 
 class Solver(abc.ABC):
