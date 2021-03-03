@@ -125,14 +125,14 @@ class GeneticSolver(Solver):
             schedules.sort(key=lambda x: x.score)
             schedules = schedules[len(schedules)//2:]
             schedules = self.breed_schedules(schedules)
-            self.mutate_schedules(schedules)
+            schedules = self.mutate_schedules(schedules)
             print(' [DONE]')
 
         print(f'Best score: {max_score}')
 
     def run_from_existing(self, filename: str) -> None:
         schedules: list[GeneticSolver.EvaluatedSchedule] = [self.EvaluatedSchedule(Schedule.from_file(filename)) for _ in range(self.population)]
-        self.run(schedules)
+        self.run(self.mutate_schedules(schedules))
 
 
     def run_from_random(self) -> None:
