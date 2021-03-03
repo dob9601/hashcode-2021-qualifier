@@ -15,7 +15,7 @@ class Street:
 
     @property
     def cars(self) -> list[car.Car]:
-        return [car for car in self.world.cars if car.current_street == self]
+        return [car for car in self.world.cars if car.current_street == self and not car.route_complete]
 
     @property
     def front_car(self) -> car.Car:

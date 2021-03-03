@@ -1,15 +1,19 @@
-from solvers.genetic_solver import GeneticSolver
-from world import World
-from solvers.random_solver import RandomSolver
-from solvers.genetic_solver import GeneticSolver
+import street2, world2, schedule
 
-from pprint import PrettyPrinter
 
-pp = PrettyPrinter(indent=4)
-print = pp.pprint
+# Score should be 710,011
+w=world2.World('e.txt')
+s=schedule.Schedule.from_file('e_bps_779288') # d_ass_1583635
 
-filename = 'e.txt'
+# Score should be 2,002
+# w=world2.World('a.txt')
+# s=schedule.Schedule.from_file('a_gs_2010')
 
-world = World(filename)
-solver = GeneticSolver(world)
-solver.run_from_existing('e_bps_721933')
+# Score should be 1320177, comes out to 1320031
+w=world2.World('f.txt')
+s=schedule.Schedule.from_file('f_bps_1411194')
+
+# Score should be 4566888
+w=world2.World('b.txt')
+s=schedule.Schedule.from_file('b_bps_4566888')
+print(w.simulate(s))
