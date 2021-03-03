@@ -10,7 +10,7 @@ class GeneticSolver(Solver):
     name = 'gs'
     epochs = 1000
     population = 252
-    mutativity = 0.005
+    mutativity = 0.0005
 
     class EvaluatedSchedule():
         def __init__(self, schedule: Schedule, score=0):
