@@ -19,8 +19,13 @@ s=schedule.Schedule.from_file('f_bps_1411194')
 w=world2.World('b.txt')
 s=schedule.Schedule.from_file('b_bps_4566888')
 print(w.simulate(s))
-"""
 
 w=world2.World('e.txt')
 solver = GeneticSolver(w)
 solver.run_from_existing('e_bps_779288')
+"""
+
+
+w=world2.World('d.txt')
+solver = GeneticSolver(w)
+solver.run_from_existing('d_ass_1583635')
