@@ -1,6 +1,8 @@
 import street2, world2, schedule
+from solvers.genetic_solver import GeneticSolver
 
 
+"""
 # Score should be 710,011
 w=world2.World('e.txt')
 s=schedule.Schedule.from_file('e_bps_779288') # d_ass_1583635
@@ -17,3 +19,8 @@ s=schedule.Schedule.from_file('f_bps_1411194')
 w=world2.World('b.txt')
 s=schedule.Schedule.from_file('b_bps_4566888')
 print(w.simulate(s))
+"""
+
+w=world2.World('e.txt')
+solver = GeneticSolver(w)
+solver.run_from_existing('e_bps_779288')
