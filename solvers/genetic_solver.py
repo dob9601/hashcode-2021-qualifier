@@ -1,7 +1,7 @@
 import random
 
 from solvers.solver import Solver
-from world2 import World
+from world import World
 from schedule import Schedule
 import redis
 import pickle

@@ -57,6 +57,16 @@ class World:
 
         points = 0
 
+
+        """
+        active_streets = []
+        for car in self.cars:
+            for street in car.streets:
+                street = self.streets[street]
+                if street not in active_streets:
+                    active_streets.append(street)
+        """
+
         for tick in range(self.duration + 1):
             # print(self.cars[278])
             if tick % 100 == 0: print(f'{tick}/{self.duration}')
@@ -66,7 +76,7 @@ class World:
 
             # print(len(self.streets['dif-dig'].cars))
 
-            for street in self.streets.values():
+            for street in self.streets.values(): #active_streets
                 points += street.step(tick)
 
         for current_car in self.cars:
