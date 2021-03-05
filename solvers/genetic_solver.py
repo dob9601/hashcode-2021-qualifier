@@ -148,7 +148,6 @@ class GeneticSolver(Solver):
             schedules.append(self.EvaluatedSchedule(self.generate_random_schedule()))
 
         print()
-        print('\n'.join([str(s.schedule.data) for s in schedules]))
 
 
 
