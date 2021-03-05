@@ -33,6 +33,6 @@ s=schedule.Schedule.from_file('d_ass_1583635')
 """
 
 
-w=world.World('b.txt')
-s=schedule.Schedule.from_file('b_bps_4566888')
-print(w.simulate(s))
+w=world.World('d.txt')
+solver=GeneticSolver(w)
+solver.run_from_existing('d_ass_1583635')

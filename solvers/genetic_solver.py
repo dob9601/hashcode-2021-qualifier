@@ -9,7 +9,7 @@ import pickle
 class GeneticSolver(Solver):
     name = 'gs'
     epochs = 1000
-    population = 252
+    population = 100
     mutativity = 0.0005
 
     class EvaluatedSchedule():
@@ -146,7 +146,9 @@ class GeneticSolver(Solver):
         for i in range(self.population):
             print(f'-> Schedule {i+1}/{self.population}', end='\r')
             schedules.append(self.EvaluatedSchedule(self.generate_random_schedule()))
+
         print()
+        print('\n'.join([str(s.schedule.data) for s in schedules]))
 
 
 
