@@ -136,7 +136,9 @@ class GeneticSolver(Solver):
 
     def run_from_existing(self, filename: str) -> None:
         schedules: list[GeneticSolver.EvaluatedSchedule] = [self.EvaluatedSchedule(Schedule.from_file(filename)) for _ in range(self.population)]
-        self.run(self.mutate_schedules(schedules))
+        schedules = self.mutate_schedules(schedules)
+        schedules = self.mutate_schedules(schedules)
+        self.run(schedules)
 
 
     def run_from_random(self) -> None:
