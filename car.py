@@ -9,7 +9,10 @@ class Car:
         self.visited: list[street.Street] = []
         self.initial_position = current_position
         self.current_position = current_position
+        self.update_initial_street()
 
+
+    def update_initial_street(self):
         self.route[0].cached_cars.append(self)
 
     def step(self, tick: int) -> None:
@@ -38,6 +41,7 @@ class Car:
         self.route = self.visited + self.route
         self.visited = []
         self.current_position = self.initial_position
+        self.update_initial_street()
 
     def __repr__(self):
         return f'<Route: {self.route}, Time on road: {self.current_position}, Route complete: {self.route_complete}>'
