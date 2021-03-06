@@ -50,7 +50,9 @@ class World:
 
     def simulate(self, world_schedule: schedule.Schedule) -> int:
         for i, schedule in enumerate(world_schedule.data):
-            self.intersections[i].schedule = schedule
+            current_intersection = self.intersections[i]
+            for current_street in current_intersection.streets:
+                current_street.set_schedule(schedule)
 
         points = 0
 
@@ -60,8 +62,6 @@ class World:
         for tick in range(self.duration + 1):
             if tick % 100 == 0:
                 print(f'-> Step {tick}/{self.duration}', end='\r')
-            for intersection in self.intersections:
-                intersection.step(tick)
 
             cars_to_remove = []
             for current_car in active_cars:

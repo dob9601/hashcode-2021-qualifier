@@ -15,10 +15,17 @@ class Street:
         self.name = name
         self.world = world
 
+        self.schedule: list[bool] = []
         self.light_green = False
 
         self.cached_front_car = Street.CachedFrontCar(0, None)
         self.cached_cars: list[car.Car] = []
+
+    def set_schedule(self, intersection_schedule: list[str]):
+        self.schedule = [item == self.name for item in intersection_schedule]
+
+    def is_light_green(self, tick: int):
+        return self.schedule[tick%len(self.schedule)]
 
     @property
     def cars(self) -> list[car.Car]:

@@ -17,7 +17,7 @@ class Car:
 
         if not self.route_complete:
             if self.current_position >= len(self.route[0]):
-                if self.current_street.light_green and self.current_street.get_front_car(tick) == self:
+                if self.current_street.is_light_green(tick) and self.current_street.get_front_car(tick) == self:
                     old_street = self.route.pop(0)
                     self.visited.append(old_street)
                     old_street.cached_cars.remove(self)
