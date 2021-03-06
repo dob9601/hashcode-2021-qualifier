@@ -18,10 +18,11 @@ class Street:
         self.light_green = False
 
         self.cached_front_car = Street.CachedFrontCar(0, None)
+        self.cached_cars: list[car.Car] = []
 
     @property
     def cars(self) -> list[car.Car]:
-        return [car for car in self.world.cars if car.current_street == self and not car.route_complete]
+        return self.cached_cars
 
     def get_front_car(self, tick: int) -> car.Car:
         if self.cached_front_car.tick == tick and self.cached_front_car.front_car is not None:

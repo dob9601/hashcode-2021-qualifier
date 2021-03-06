@@ -10,14 +10,21 @@ class Car:
         self.initial_position = current_position
         self.current_position = current_position
 
+        self.route[0].cached_cars.append(self)
+
     def step(self, tick: int) -> None:
         self.current_position += 1
 
         if not self.route_complete:
             if self.current_position >= len(self.route[0]):
                 if self.current_street.light_green and self.current_street.get_front_car(tick) == self:
-                    self.visited.append(self.route.pop(0))
+                    old_street = self.route.pop(0)
+                    self.visited.append(old_street)
+                    old_street.cached_cars.remove(self)
+
                     self.current_position = 0
+
+                    self.route[0].cached_cars.append(self)
 
     @property
     def current_street(self) -> Optional[street.Street]:

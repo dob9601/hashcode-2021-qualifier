@@ -54,6 +54,8 @@ class World:
 
         points = 0
 
+        active_cars = list(self.cars)
+
         print('Running Solution')
         for tick in range(self.duration + 1):
             if tick % 100 == 0:
@@ -61,11 +63,17 @@ class World:
             for intersection in self.intersections:
                 intersection.step(tick)
 
-            for current_car in self.cars:
+            cars_to_remove = []
+            for current_car in active_cars:
                 if not current_car.route_complete:
                     current_car.step(tick)
                     if current_car.route_complete:
                         points += self.points_per_car + (self.duration - tick)
+                        current_car.current_street.cached_cars.remove(current_car)
+                        cars_to_remove.append(current_car)
+
+            for current_car in cars_to_remove:
+                active_cars.remove(current_car)
 
 
         print('\n-> Restoring initial state')
