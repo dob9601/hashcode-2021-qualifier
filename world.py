@@ -35,7 +35,7 @@ class World:
                 self.streets[street_object.name] = street_object
 
                 intersection_id = int(street_data[1])
-                if not(self.intersections[intersection_id]):
+                if not self.intersections[intersection_id]:
                     self.intersections[intersection_id] = intersection.Intersection(intersection_id)
                 self.intersections[intersection_id].streets.append(street_object)
 

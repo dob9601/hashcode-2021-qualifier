@@ -36,16 +36,6 @@ solver = GeneticSolver(w)
 solver.run_from_existing('d_gs_1609104')
 
 """
-w=world.World('d.txt')
-s=schedule.Schedule.from_file('d_gs_1609104')
-print(w.simulate(s))
-print(w.simulate(s))
-print(w.simulate(s))
-print(w.simulate(s))
-print(w.simulate(s))
-print(w.simulate(s))
-print(w.simulate(s))
-print(w.simulate(s))
-print(w.simulate(s))
-print(w.simulate(s))
+w=world.World('e.txt')
+s=schedule.Schedule.from_file('e_ro_732258') # 732180
 print(w.simulate(s))
