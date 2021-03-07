@@ -77,10 +77,10 @@ class World:
 
 
         print('\n-> Restoring initial state')
-        for current_car in self.cars:
-            current_car.reset()
-
         for current_street in self.streets.values():
             current_street.reset()
+
+        for current_car in self.cars:
+            current_car.reset()
 
         return points

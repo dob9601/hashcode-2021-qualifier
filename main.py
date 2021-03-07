@@ -30,10 +30,22 @@ solver.run_from_existing('d_ass_1583635')
 
 w=world2.World('d.txt')
 s=schedule.Schedule.from_file('d_ass_1583635')
+
+w=world.World('d.txt')
+solver = GeneticSolver(w)
+solver.run_from_existing('d_gs_1609104')
+
 """
-
-
-
-w=world.World('b.txt')
-s=schedule.Schedule.from_file('b_bps_4566888')
+w=world.World('d.txt')
+s=schedule.Schedule.from_file('d_gs_1609104')
+print(w.simulate(s))
+print(w.simulate(s))
+print(w.simulate(s))
+print(w.simulate(s))
+print(w.simulate(s))
+print(w.simulate(s))
+print(w.simulate(s))
+print(w.simulate(s))
+print(w.simulate(s))
+print(w.simulate(s))
 print(w.simulate(s))
