@@ -46,7 +46,7 @@ class World:
                 for route_street in car_data[1:]:
                     street_object = self.streets[route_street]
                     route.append(street_object)
-                self.cars.append(car.Car(route, route[0].length + car_count - i))
+                self.cars.append(car.Car(route))
 
     def simulate(self, world_schedule: schedule.Schedule) -> int:
         for i, schedule in enumerate(world_schedule.data):
@@ -65,16 +65,14 @@ class World:
 
             cars_to_remove = []
             for current_car in active_cars:
-                if not current_car.route_complete:
-                    current_car.step(tick)
-                    if current_car.route_complete:
-                        points += self.points_per_car + (self.duration - tick)
-                        current_car.current_street.cached_cars.remove(current_car)
-                        cars_to_remove.append(current_car)
+                current_car.step(tick)
+                if current_car.is_route_complete(tick):
+                    points += self.points_per_car + (self.duration - tick)
+                    current_car.current_street.cached_cars.remove(current_car)
+                    cars_to_remove.append(current_car)
 
             for current_car in cars_to_remove:
                 active_cars.remove(current_car)
-
 
         print('\n-> Restoring initial state')
         for current_street in self.streets.values():

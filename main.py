@@ -8,7 +8,7 @@ w=world2.World('e.txt')
 s=schedule.Schedule.from_file('e_bps_779288') # d_ass_1583635
 
 # Score should be 2,002
-# w=world2.World('a.txt')
+# w=world.World('a.txt')
 # s=schedule.Schedule.from_file('a_gs_2010')
 
 # Score should be 1320177, comes out to 1320031
@@ -35,6 +35,8 @@ w=world.World('d.txt')
 solver = GeneticSolver(w)
 solver.run_from_existing('d_gs_1609104')
 
+w=world.World('e.txt')
+s=schedule.Schedule.from_file('e_ro_732258') # 732180
 """
 w=world.World('e.txt')
 s=schedule.Schedule.from_file('e_ro_732258') # 732180
