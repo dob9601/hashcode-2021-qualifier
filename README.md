@@ -11,7 +11,12 @@ Included are a variety of solvers:
 
 ## Scores at the end of the extended round
 A: 2002
+
 B: 4,566,388
+
 C: 1,298,723
+
 D: 1,706,203
+
 E: 1,366,761
+
